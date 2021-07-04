@@ -20,18 +20,19 @@ public enum TipoCliente {
 		return descricao;
 	}
 	
-	public static TipoCliente toEnum(Integer codigo) {
-		if (codigo == null) {
+	public static TipoCliente toEnum(Integer cod) {
+
+		if (cod == null) {
 			return null;
 		}
-		
-		for (TipoCliente x: TipoCliente.values()) {
-			if (codigo.equals(x.getCodigo())) {
+
+		for (TipoCliente x : TipoCliente.values()) {
+			if (cod.equals(x.getCodigo())) {
 				return x;
 			}
 		}
-		
-		throw new IllegalArgumentException("Id inválido: " + codigo);
+
+		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
 	
 }
