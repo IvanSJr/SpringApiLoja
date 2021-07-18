@@ -3,24 +3,42 @@ package com.navi.springapiloja.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Pedido implements Serializable{
-	
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Date date;
+	private Date instante;
+
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
 	private Pagamento pagamento;
+
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
-	
+
 	public Pedido() {
-		
 	}
 
-	public Pedido(Integer id, Date date, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
-		this.date = date;
-		this.pagamento = pagamento;
+		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
@@ -33,12 +51,12 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getInstante() {
+		return instante;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setInstante(Date instante) {
+		this.instante = instante;
 	}
 
 	public Pagamento getPagamento() {
@@ -89,5 +107,7 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
+
+
+
 }
