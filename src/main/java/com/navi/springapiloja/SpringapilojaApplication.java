@@ -116,7 +116,7 @@ public class SpringapilojaApplication implements CommandLineRunner{
 		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		ped1.setPagamento(pag1);
 		
-		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("27/07/2021 00:00") ,null);
+		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, null, sdf.parse("27/07/2021 00:00"));
 		ped2.setPagamento(pag2);
 		
 		Pagamento pag3 = new PagamentoComCartao(null, EstadoPagamento.CANCELADO, ped3, 12);
