@@ -7,9 +7,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.navi.springapiloja.domain.enums.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +26,7 @@ public class PagamentoComBoleto extends Pagamento{
  	public PagamentoComBoleto() {
  		
  	}
-
+ 	
 	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataPagamento, Date dataVencimento) {
 		super(id, estado, pedido);
 		this.dataPagamento = dataPagamento;
