@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.navi.springapiloja.domain.Categoria;
 import com.navi.springapiloja.domain.Pedido;
-import com.navi.springapiloja.dto.CategoriaDTO;
 import com.navi.springapiloja.services.PedidoService;
 
 @RequestMapping(value = "/pedidos")
@@ -25,7 +23,7 @@ public class PedidoResource {
 	
 	@Autowired
 	private PedidoService service;
-	
+		
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Pedido obj = service.find(id);
