@@ -13,33 +13,33 @@ import com.navi.springapiloja.services.validations.ClienteInsert;
 public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@NotEmpty(message = "Preenchimento obrigatório.")
-	@Length(min=2, max=120, message = "Tamanho mínimo de 2 e máximo de 120.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
+	@Length(min=2, max=120, message = "Tamanho mï¿½nimo de 2 e mï¿½ximo de 120.")
 	private String nome;
 	
-	@NotEmpty(message = "Preenchimento obrigatório.")
-	@Email(message = "E-mail inválido.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
+	@Email(message = "E-mail invï¿½lido.")
 	private String email;
-	@NotEmpty(message = "Preenchimento obrigatório.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
 	private String cpfOuCnpj;
 	
 	private Integer tipo;
 	
-	@NotEmpty(message = "Preenchimento obrigatório.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
 	private String logadouro;
-	@NotEmpty(message = "Preenchimento obrigatório.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
 	private String numero;
 	
 	private String complemento;
 	
-	@NotEmpty(message = "Preenchimento obrigatório.")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio.")
 	private String bairro;
 	
-	@NotEmpty(message = "Preenchimento obrigatório")
-	@Length(min = 8, message = "Digite um CEP válido")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio")
+	@Length(min = 8, message = "Digite um CEP vï¿½lido")
 	private String cep;
 	
-	@NotEmpty(message = "Preenchimento obrigatório")
+	@NotEmpty(message = "Preenchimento obrigatï¿½rio")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
