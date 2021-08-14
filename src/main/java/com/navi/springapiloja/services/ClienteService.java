@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.navi.springapiloja.domain.Cidade;
 import com.navi.springapiloja.domain.Cliente;
 import com.navi.springapiloja.domain.Endereco;
+import com.navi.springapiloja.domain.enums.Perfil;
 import com.navi.springapiloja.domain.enums.TipoCliente;
 import com.navi.springapiloja.dto.ClienteDTO;
 import com.navi.springapiloja.dto.ClienteNewDTO;
 import com.navi.springapiloja.repositories.ClienteRepository;
 import com.navi.springapiloja.repositories.EnderecoRepository;
+import com.navi.springapiloja.security.UserSpringSecurity;
+import com.navi.springapiloja.services.exceptions.AuthorizationException;
 import com.navi.springapiloja.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -35,6 +38,13 @@ public class ClienteService {
 	private BCryptPasswordEncoder bpe;
 
 	public Cliente find(Integer id) {
+		
+		UserSpringSecurity user = UserService.authenticated();
+		
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto de id " + id + ", Tipo: " + Cliente.class.getName()));
 	}
