@@ -20,6 +20,7 @@ import com.navi.springapiloja.domain.PagamentoComCartao;
 import com.navi.springapiloja.domain.Pedido;
 import com.navi.springapiloja.domain.Produto;
 import com.navi.springapiloja.domain.enums.EstadoPagamento;
+import com.navi.springapiloja.domain.enums.Perfil;
 import com.navi.springapiloja.domain.enums.TipoCliente;
 import com.navi.springapiloja.repositories.CategoriaRepository;
 import com.navi.springapiloja.repositories.CidadeRepository;
@@ -129,12 +130,17 @@ public class DbService {
 
 		Cliente cli1 = new Cliente(null, "Ivan Santos", "ivanjrjesus01@gmail.com", "08062313473", TipoCliente.PESSOAFISICA, bpe.encode("27062001jr"));
 		cli1.getTelefones().addAll(Arrays.asList("71991085709","71985363655","7132514172"));
+		Cliente cli2 = new Cliente(null, "Carmen Gomes", "ivan.junior2706@gmail.com", "26455504607", TipoCliente.PESSOAFISICA, bpe.encode("27062001jr"));
+		cli2.getTelefones().addAll(Arrays.asList("71991363603","7132514172"));
+		cli2.addPerfil(Perfil.ADMIN);
 		Endereco end1 = new Endereco(null, "Nossa Senhora Aparecida", "412", "Quadra M Lote 22", "Itinga", "42739195", cli1, c4);
 		Endereco end2 = new Endereco(null, "Edvaldo Cezar", "20", "Quadra J Lote 20", "Itinga", "42739240", cli1, c4);
 		Endereco end3 = new Endereco(null, "Rua Arlindo Nogueira", "12", "Quadra A Lote 50", "Centro", "64000290", cli1, c2);
+		Endereco end4 = new Endereco(null, "Avenida Nogueira", "126", null, "Centro", "64000290", cli2, c2);
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2, end3));
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));
+		cli2.getEnderecos().addAll(Arrays.asList(end4));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
