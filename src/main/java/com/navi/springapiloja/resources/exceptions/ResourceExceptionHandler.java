@@ -64,6 +64,12 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 	
+	@ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
+	public ResponseEntity<StandardError> UploadSizeExceeded(org.springframework.web.multipart.MaxUploadSizeExceededException e, HttpServletRequest request){
+		StandardError error = new StandardError(HttpStatus.LENGTH_REQUIRED.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.LENGTH_REQUIRED).body(error);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validationException(MethodArgumentNotValidException e, HttpServletRequest request){
 		ValidationError error = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de valida��o", System.currentTimeMillis());
