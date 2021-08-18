@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import org.imgscalr.Scalr;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
@@ -18,22 +17,21 @@ import com.navi.springapiloja.services.exceptions.FileException;
 
 @Service
 public class ImageService {
-	
-	public BufferedImage getJpgImageFromFie(MultipartFile uploadFile) {
-		String ext = FilenameUtils.getExtension(uploadFile.getOriginalFilename());
-		if(!"png".equals(ext) && !"jpg".equals(ext)) {
-			throw new FileException("Somente imagens PNG e JPG são aceitas");
+
+	public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile) {
+		String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
+		if (!"png".equals(ext) && !"jpg".equals(ext)) {
+			throw new FileException("Somente imagens PNG e JPG são permitidas");
 		}
-		
+
 		try {
-			BufferedImage img = ImageIO.read(uploadFile.getInputStream());
-			if("png".equals(ext)) {
+			BufferedImage img = ImageIO.read(uploadedFile.getInputStream());
+			if ("png".equals(ext)) {
 				img = pngToJpg(img);
 			}
-			
 			return img;
 		} catch (IOException e) {
-			throw new FileException("Erro ao ler arquivo.");
+			throw new FileException("Erro ao ler arquivo");
 		}
 	}
 
@@ -53,14 +51,4 @@ public class ImageService {
 			throw new FileException("Erro ao ler arquivo");
 		}
 	}
-	
-	public BufferedImage cropSquare(BufferedImage img) {
-		int min = (img.getHeight() <= img.getWidth()) ? img.getHeight() : img.getWidth();
-		return Scalr.crop(img, (img.getWidth()/2) - (min/2),(img.getHeight()/2) - (min/2), min, min);
-	}
-	
-	public BufferedImage resize(BufferedImage sourceImg, int size) {
-		return Scalr.resize(sourceImg, Scalr.Method.ULTRA_QUALITY, size);
-	}
-	
 }
